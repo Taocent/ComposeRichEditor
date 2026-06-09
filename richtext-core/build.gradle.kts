@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.jvm.tasks.Jar
 import org.gradle.plugins.signing.SigningExtension
 
 plugins {
@@ -18,6 +19,10 @@ val publishRepositoryUsername = providers.environmentVariable("COMPOSE_RICH_EDIT
 val publishRepositoryPassword = providers.environmentVariable("COMPOSE_RICH_EDITOR_PUBLISH_PASSWORD")
 val signingKey = providers.environmentVariable("COMPOSE_RICH_EDITOR_SIGNING_KEY")
 val signingPassword = providers.environmentVariable("COMPOSE_RICH_EDITOR_SIGNING_PASSWORD")
+
+val emptyJavadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+}
 
 kotlin {
     iosArm64()
@@ -75,6 +80,7 @@ publishing {
 
     publications.withType<MavenPublication>().configureEach {
         artifactId = if (name == "kotlinMultiplatform") publishedArtifactId else "$publishedArtifactId-$name"
+        artifact(emptyJavadocJar)
         pom {
             name.set("ComposeRichEditor Core")
             description.set("Core state, formatting, paragraph model, emoji, paste, serialization, platform adapters, and shared internals for ComposeRichEditor.")
