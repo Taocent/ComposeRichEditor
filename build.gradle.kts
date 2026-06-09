@@ -9,7 +9,10 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
 }
 
+val composeRichEditorVersion = providers.environmentVariable("COMPOSE_RICH_EDITOR_VERSION")
+    .orElse("0.1.0-alpha01")
+
 allprojects {
     group = "io.github.taocent"
-    version = "0.1.0-alpha01"
+    version = composeRichEditorVersion.get()
 }

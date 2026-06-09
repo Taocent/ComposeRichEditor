@@ -34,6 +34,14 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Resolve Maven version from release tag
+        run: |
+          TAG_NAME="${GITHUB_REF_NAME}"
+          VERSION="${TAG_NAME#v}"
+          test -n "$VERSION"
+          echo "COMPOSE_RICH_EDITOR_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Resolved Maven version: $VERSION"
+
       - name: Validate secrets
         run: |
           test -n "$COMPOSE_RICH_EDITOR_PUBLISH_USERNAME"
