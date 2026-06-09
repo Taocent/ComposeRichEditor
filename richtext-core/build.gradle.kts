@@ -63,9 +63,11 @@ publishing {
             maven {
                 name = "remote"
                 url = uri(repositoryUrl)
-                credentials {
-                    username = publishRepositoryUsername.orNull
-                    password = publishRepositoryPassword.orNull
+                if (!repositoryUrl.startsWith("file:")) {
+                    credentials {
+                        username = publishRepositoryUsername.orNull
+                        password = publishRepositoryPassword.orNull
+                    }
                 }
             }
         }
