@@ -21,7 +21,7 @@ typealias RichTextState = com.taocent.simple.compose.component.richtext.core.Ric
 typealias RichTextFormat = com.taocent.simple.compose.component.richtext.core.RichTextFormat
 typealias RichTextConfig = com.taocent.simple.compose.component.richtext.core.RichTextConfig
 typealias FontSizeItem = com.taocent.simple.compose.component.richtext.core.FontSizeItem
-typealias CustomEmoji = com.taocent.simple.compose.component.richtext.core.internal.emoji.CustomEmoji
+typealias CustomEmoji = com.taocent.simple.compose.component.richtext.core.CustomEmoji
 
 /**
  * Re-export [LocalRichTextConfig] — 委托到 :richtext-core,保持导入路径

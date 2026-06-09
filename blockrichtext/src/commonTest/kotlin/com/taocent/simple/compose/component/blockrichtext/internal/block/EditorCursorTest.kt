@@ -4,6 +4,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import com.taocent.simple.compose.component.blockrichtext.BlockState
+import com.taocent.simple.compose.component.blockrichtext.ExperimentalBlockRichTextApi
 import com.taocent.simple.compose.component.blockrichtext.RichTextState
 import com.taocent.simple.compose.component.blockrichtext.TableBlock
 import kotlin.test.Test
@@ -11,6 +12,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 
+@OptIn(ExperimentalBlockRichTextApi::class)
 class EditorCursorTest {
 
     @Test

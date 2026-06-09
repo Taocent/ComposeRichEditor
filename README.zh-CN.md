@@ -10,9 +10,9 @@ ComposeRichEditor 是一个面向 Android、iOS、Desktop 和 Web 的 Compose Mu
 
 | 模块 | Artifact | 状态 | 说明 |
 |---|---|---|---|
-| `richtext-core` | `com.github.taocent:compose-richtext-core` | Alpha | 核心状态、格式化、段落模型、emoji、粘贴、序列化、平台适配和共享 UI 内部能力。 |
-| `richtext` | `com.github.taocent:compose-richtext` | Alpha | 可直接使用的富文本编辑器 Composable、工具栏、面板和弹窗。 |
-| `blockrichtext` | `com.github.taocent:compose-block-richtext` | Alpha / Experimental | 块级编辑器，包含文本块、表格、块导航和全局浮动工具栏行为。 |
+| `richtext-core` | `io.github.taocent:compose-richtext-core` | Alpha | 核心状态、格式化、段落模型、emoji、粘贴、序列化、平台适配和共享 UI 内部能力。 |
+| `richtext` | `io.github.taocent:compose-richtext` | Alpha | 可直接使用的富文本编辑器 Composable、工具栏、面板和弹窗。 |
+| `blockrichtext` | `io.github.taocent:compose-block-richtext` | Alpha / Experimental | 块级编辑器，包含文本块、表格、块导航和全局浮动工具栏行为。 |
 | `shared`、`androidApp`、`desktopApp`、`webApp`、`iosApp` | 不发布 | 示例 | 支持平台的 Demo 应用和集成示例。 |
 
 ## 平台支持
@@ -30,9 +30,9 @@ ComposeRichEditor 是一个面向 Android、iOS、Desktop 和 Web 的 Compose Mu
 
 ```kotlin
 dependencies {
-    implementation("com.github.taocent:compose-richtext-core:0.1.0-alpha01")
-    implementation("com.github.taocent:compose-richtext:0.1.0-alpha01")
-    implementation("com.github.taocent:compose-block-richtext:0.1.0-alpha01")
+    implementation("io.github.taocent:compose-richtext-core:0.1.0-alpha01")
+    implementation("io.github.taocent:compose-richtext:0.1.0-alpha01")
+    implementation("io.github.taocent:compose-block-richtext:0.1.0-alpha01")
 }
 ```
 
@@ -76,8 +76,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.taocent.simple.compose.component.blockrichtext.BlockRichTextEditor
+import com.taocent.simple.compose.component.blockrichtext.ExperimentalBlockRichTextApi
 import com.taocent.simple.compose.component.blockrichtext.rememberBlockState
 
+@OptIn(ExperimentalBlockRichTextApi::class)
 @Composable
 fun BlockEditorScreen() {
     val state = rememberBlockState()
@@ -88,6 +90,8 @@ fun BlockEditorScreen() {
     )
 }
 ```
+
+块级编辑器 API 在 alpha 阶段标记为 `ExperimentalBlockRichTextApi`。建议在拥有 `BlockState` 的页面或封装 Composable 上以尽量小的作用域 opt-in。
 
 ## 功能
 
@@ -106,9 +110,9 @@ fun BlockEditorScreen() {
 ## 已知限制
 
 - 项目仍处于 alpha 阶段，公开 API 名称和包结构可能调整。
-- `blockrichtext` 比普通 `richtext` 编辑器更加实验性。
+- `blockrichtext` 比普通 `richtext` 编辑器更加实验性，需要显式 opt-in `ExperimentalBlockRichTextApi`。
 - Web 支持仍为实验性，行为可能还无法完全对齐 Android、iOS 和 Desktop。
-- Maven 发布配置尚未完成，文档中的坐标是计划中的首个 alpha artifact。
+- Maven 发布已配置本地和远程仓库，文档中的坐标是计划中的首个 alpha artifact。
 - 部分包名仍使用原始项目命名空间，稳定版前可能调整。
 
 ## 开发

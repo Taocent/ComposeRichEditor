@@ -10,6 +10,6 @@ plugins {
 }
 
 allprojects {
-    group = "com.github.taocent"
+    group = "io.github.taocent"
     version = "0.1.0-alpha01"
 }

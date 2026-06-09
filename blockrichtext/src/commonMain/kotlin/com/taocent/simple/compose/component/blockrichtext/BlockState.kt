@@ -18,6 +18,7 @@ import com.taocent.simple.compose.component.blockrichtext.internal.block.EditorC
 import com.taocent.simple.compose.component.richtext.core.internal.serialization.RichTextSerializer
 import com.taocent.simple.compose.component.blockrichtext.internal.undo.BlockUndoManager
 
+@ExperimentalBlockRichTextApi
 class BlockState(
     maxUndoHistory: Int = 100,
     undoMergeIntervalMs: Long = 500

@@ -9,6 +9,7 @@ import kotlin.test.assertTrue
 /**
  * 覆盖 [TextBlock] 与 [TableBlock] 数据模型的基础契约。
  */
+@OptIn(ExperimentalBlockRichTextApi::class)
 class DocumentBlockTest {
 
     // region TextBlock

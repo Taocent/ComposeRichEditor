@@ -95,6 +95,7 @@ private enum class BlockToolCategory {
 }
 
 @Composable
+@ExperimentalBlockRichTextApi
 fun BlockRichTextEditor(
     state: BlockState,
     modifier: Modifier = Modifier,
@@ -120,6 +121,7 @@ fun BlockRichTextEditor(
 }
 
 @Composable
+@OptIn(ExperimentalBlockRichTextApi::class)
 private fun BlockRichTextEditorContent(
     state: BlockState,
     modifier: Modifier
@@ -588,6 +590,7 @@ private fun BlockRichTextEditorContent(
 }
 
 @Composable
+@ExperimentalBlockRichTextApi
 fun rememberBlockState(
     maxUndoHistory: Int = 100,
     undoMergeIntervalMs: Long = 500

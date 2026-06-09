@@ -5,9 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
 import com.taocent.simple.compose.component.blockrichtext.DocumentBlock
+import com.taocent.simple.compose.component.blockrichtext.ExperimentalBlockRichTextApi
 import com.taocent.simple.compose.component.blockrichtext.internal.block.EditorCursor
 import kotlin.time.TimeSource
 
+@OptIn(ExperimentalBlockRichTextApi::class)
 internal class BlockUndoManager(
     private val maxSize: Int = 100,
     private val mergeIntervalMs: Long = 500

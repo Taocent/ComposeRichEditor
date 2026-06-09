@@ -1,0 +1,86 @@
+name: Publish
+
+on:
+  release:
+    types:
+      - published
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to Maven Central
+    runs-on: macos-latest
+    timeout-minutes: 90
+    env:
+      COMPOSE_RICH_EDITOR_PUBLISH_USERNAME: ${{ secrets.COMPOSE_RICH_EDITOR_PUBLISH_USERNAME }}
+      COMPOSE_RICH_EDITOR_PUBLISH_PASSWORD: ${{ secrets.COMPOSE_RICH_EDITOR_PUBLISH_PASSWORD }}
+      COMPOSE_RICH_EDITOR_SIGNING_KEY: ${{ secrets.COMPOSE_RICH_EDITOR_SIGNING_KEY }}
+      COMPOSE_RICH_EDITOR_SIGNING_PASSWORD: ${{ secrets.COMPOSE_RICH_EDITOR_SIGNING_PASSWORD }}
+      COMPOSE_RICH_EDITOR_PUBLISH_URL: file://${{ github.workspace }}/build/central-portal-staging
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Validate secrets
+        run: |
+          test -n "$COMPOSE_RICH_EDITOR_PUBLISH_USERNAME"
+          test -n "$COMPOSE_RICH_EDITOR_PUBLISH_PASSWORD"
+          test -n "$COMPOSE_RICH_EDITOR_SIGNING_KEY"
+          test -n "$COMPOSE_RICH_EDITOR_SIGNING_PASSWORD"
+
+      - name: Run JVM tests
+        run: ./gradlew :richtext-core:jvmTest :richtext:jvmTest :blockrichtext:jvmTest
+
+      - name: Compile common and JVM targets
+        run: ./gradlew :richtext-core:compileKotlinMetadata :richtext:compileKotlinJvm :blockrichtext:compileKotlinJvm
+
+      - name: Compile iOS simulator targets
+        run: ./gradlew :richtext-core:compileKotlinIosSimulatorArm64 :richtext:compileKotlinIosSimulatorArm64 :blockrichtext:compileKotlinIosSimulatorArm64
+
+      - name: Publish signed artifacts to staging repository
+        run: ./gradlew :richtext-core:publishAllPublicationsToRemoteRepository :richtext:publishAllPublicationsToRemoteRepository :blockrichtext:publishAllPublicationsToRemoteRepository
+
+      - name: Create Central Portal bundle
+        run: |
+          test -d "build/central-portal-staging/io/github/taocent"
+          find "build/central-portal-staging/io/github/taocent" -name "*.asc" | grep -q .
+          mkdir -p build/central-portal-bundle/io/github
+          cp -R "build/central-portal-staging/io/github/taocent" build/central-portal-bundle/io/github/
+          cd build/central-portal-bundle
+          zip -r ../compose-rich-editor-central-bundle.zip io
+
+      - name: Upload bundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compose-rich-editor-central-bundle
+          path: build/compose-rich-editor-central-bundle.zip
+
+      - name: Upload to Central Portal
+        run: |
+          AUTH_TOKEN=$(python3 - <<'PY'
+          import base64
+          import os
+          username = os.environ["COMPOSE_RICH_EDITOR_PUBLISH_USERNAME"]
+          password = os.environ["COMPOSE_RICH_EDITOR_PUBLISH_PASSWORD"]
+          print(base64.b64encode(f"{username}:{password}".encode()).decode())
+          PY
+          )
+          DEPLOYMENT_NAME="ComposeRichEditor-${GITHUB_REF_NAME}-${GITHUB_RUN_NUMBER}"
+          curl --fail-with-body \
+            --request POST \
+            --header "Authorization: Bearer ${AUTH_TOKEN}" \
+            --form "bundle=@build/compose-rich-editor-central-bundle.zip" \
+            "https://central.sonatype.com/api/v1/publisher/upload?name=${DEPLOYMENT_NAME}&publishingType=AUTOMATIC"

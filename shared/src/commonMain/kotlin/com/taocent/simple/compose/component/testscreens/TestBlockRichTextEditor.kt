@@ -17,8 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.taocent.simple.compose.component.DetailScreen
 import com.taocent.simple.compose.component.blockrichtext.BlockRichTextEditor
 import com.taocent.simple.compose.component.blockrichtext.BlockState
+import com.taocent.simple.compose.component.blockrichtext.ExperimentalBlockRichTextApi
 import com.taocent.simple.compose.component.blockrichtext.rememberBlockState
 
+@OptIn(ExperimentalBlockRichTextApi::class)
 @Composable
 fun TestBlockRichTextEditor(onBack: () -> Unit, showTopBar: Boolean = true) {
     val state = rememberBlockState()
@@ -32,6 +34,7 @@ fun TestBlockRichTextEditor(onBack: () -> Unit, showTopBar: Boolean = true) {
     }
 }
 
+@OptIn(ExperimentalBlockRichTextApi::class)
 @Composable
 private fun BlockRichTextEditorContent(
     state: BlockState,

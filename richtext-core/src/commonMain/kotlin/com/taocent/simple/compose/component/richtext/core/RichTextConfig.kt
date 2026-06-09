@@ -8,8 +8,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.taocent.simple.compose.component.richtext.core.internal.emoji.CustomEmoji
-import com.taocent.simple.compose.component.richtext.core.internal.emoji.DefaultCustomEmojis
 import com.taocent.simple.compose.component.richtext.core.paste.PasteParser
 
 /**

@@ -1,5 +1,6 @@
 package com.taocent.simple.compose.component.blockrichtext
 
+@ExperimentalBlockRichTextApi
 sealed interface DocumentBlock {
     val id: String
 }

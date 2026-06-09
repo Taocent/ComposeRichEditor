@@ -15,12 +15,14 @@ import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.taocent.simple.compose.component.blockrichtext.BlockState
+import com.taocent.simple.compose.component.blockrichtext.ExperimentalBlockRichTextApi
 import com.taocent.simple.compose.component.blockrichtext.RichTextTextField
 import com.taocent.simple.compose.component.blockrichtext.internal.platform.InterceptDeleteBackwardTextInput
 import com.taocent.simple.compose.component.blockrichtext.TableBlock
 import com.taocent.simple.compose.component.blockrichtext.TextBlock
 
 @Composable
+@OptIn(ExperimentalBlockRichTextApi::class)
 internal fun TextBlockItem(
     block: TextBlock,
     blockState: BlockState,

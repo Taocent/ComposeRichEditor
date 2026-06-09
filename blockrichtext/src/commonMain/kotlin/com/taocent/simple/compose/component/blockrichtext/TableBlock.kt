@@ -2,6 +2,7 @@ package com.taocent.simple.compose.component.blockrichtext
 
 import androidx.compose.ui.text.AnnotatedString
 
+@ExperimentalBlockRichTextApi
 data class TableBlock(
     override val id: String = generateBlockId(),
     val rows: List<TableRow>,

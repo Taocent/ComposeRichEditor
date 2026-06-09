@@ -65,6 +65,7 @@ import androidx.compose.ui.unit.sp
 import com.composables.icons.feather.Feather
 import com.composables.icons.feather.MoreHorizontal
 import com.composables.icons.feather.MoreVertical
+import com.taocent.simple.compose.component.blockrichtext.ExperimentalBlockRichTextApi
 import com.taocent.simple.compose.component.blockrichtext.RichTextState
 import com.taocent.simple.compose.component.blockrichtext.BlockState
 import com.taocent.simple.compose.component.blockrichtext.TableBlock
@@ -86,6 +87,7 @@ private sealed class DragMode {
 }
 
 @Composable
+@OptIn(ExperimentalBlockRichTextApi::class)
 internal fun TableRenderer(
     block: TableBlock,
     blockState: BlockState,
@@ -903,6 +905,7 @@ private fun TableColumnButton(
 
 // 独立的 TableCell Composable，隔离单元格重组范围
 @Composable
+@OptIn(ExperimentalBlockRichTextApi::class)
 private fun TableCell(
     cell: TableBlock.TableCell,
     rowId: String,

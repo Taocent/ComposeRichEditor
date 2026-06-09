@@ -17,6 +17,7 @@ import kotlin.test.assertTrue
  * 覆盖 [BlockState] 文档结构、文本块、表格块、删除/合并、选择高亮、
  * 焦点、undo/redo 与 JSON 序列化等核心契约。
  */
+@OptIn(ExperimentalBlockRichTextApi::class)
 class BlockStateTest {
 
     // region 初始结构

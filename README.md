@@ -10,9 +10,9 @@ ComposeRichEditor is a Compose Multiplatform rich text editor library for Androi
 
 | Module | Artifact | Status | Description |
 |---|---|---|---|
-| `richtext-core` | `com.github.taocent:compose-richtext-core` | Alpha | Core state, formatting, paragraph model, emoji, paste, serialization, platform adapters, and shared UI internals. |
-| `richtext` | `com.github.taocent:compose-richtext` | Alpha | Ready-to-use rich text editor composables, toolbar, panels, and dialogs. |
-| `blockrichtext` | `com.github.taocent:compose-block-richtext` | Alpha / Experimental | Block-based editor with text blocks, tables, block navigation, and shared floating toolbar behavior. |
+| `richtext-core` | `io.github.taocent:compose-richtext-core` | Alpha | Core state, formatting, paragraph model, emoji, paste, serialization, platform adapters, and shared UI internals. |
+| `richtext` | `io.github.taocent:compose-richtext` | Alpha | Ready-to-use rich text editor composables, toolbar, panels, and dialogs. |
+| `blockrichtext` | `io.github.taocent:compose-block-richtext` | Alpha / Experimental | Block-based editor with text blocks, tables, block navigation, and shared floating toolbar behavior. |
 | `shared`, `androidApp`, `desktopApp`, `webApp`, `iosApp` | Not published | Sample | Demo applications and integration samples for supported platforms. |
 
 ## Platform Support
@@ -30,9 +30,9 @@ The first public alpha will use the following coordinates after publishing:
 
 ```kotlin
 dependencies {
-    implementation("com.github.taocent:compose-richtext-core:0.1.0-alpha01")
-    implementation("com.github.taocent:compose-richtext:0.1.0-alpha01")
-    implementation("com.github.taocent:compose-block-richtext:0.1.0-alpha01")
+    implementation("io.github.taocent:compose-richtext-core:0.1.0-alpha01")
+    implementation("io.github.taocent:compose-richtext:0.1.0-alpha01")
+    implementation("io.github.taocent:compose-block-richtext:0.1.0-alpha01")
 }
 ```
 
@@ -76,8 +76,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.taocent.simple.compose.component.blockrichtext.BlockRichTextEditor
+import com.taocent.simple.compose.component.blockrichtext.ExperimentalBlockRichTextApi
 import com.taocent.simple.compose.component.blockrichtext.rememberBlockState
 
+@OptIn(ExperimentalBlockRichTextApi::class)
 @Composable
 fun BlockEditorScreen() {
     val state = rememberBlockState()
@@ -88,6 +90,8 @@ fun BlockEditorScreen() {
     )
 }
 ```
+
+The block editor APIs are marked with `ExperimentalBlockRichTextApi` in the alpha series. Opt in at the smallest practical scope, such as the screen or wrapper composable that owns `BlockState`.
 
 ## Features
 
@@ -106,9 +110,9 @@ fun BlockEditorScreen() {
 ## Known Limitations
 
 - The project is in alpha; public API names and package structure may change.
-- `blockrichtext` is more experimental than the plain `richtext` editor.
+- `blockrichtext` is more experimental than the plain `richtext` editor and requires `ExperimentalBlockRichTextApi` opt-in.
 - Web support is experimental and may not match Android, iOS, and Desktop behavior yet.
-- Maven publishing configuration is not complete yet; coordinates above describe the intended first alpha artifacts.
+- Maven publishing is configured for local and remote repositories; coordinates above describe the intended first alpha artifacts.
 - Some package names still use the original project namespace and may be revised before stable release.
 
 ## Development
