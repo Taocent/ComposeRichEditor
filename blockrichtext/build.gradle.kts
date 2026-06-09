@@ -20,10 +20,6 @@ val publishRepositoryPassword = providers.environmentVariable("COMPOSE_RICH_EDIT
 val signingKey = providers.environmentVariable("COMPOSE_RICH_EDITOR_SIGNING_KEY")
 val signingPassword = providers.environmentVariable("COMPOSE_RICH_EDITOR_SIGNING_PASSWORD")
 
-val emptyJavadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-}
-
 kotlin {
     iosArm64()
     iosSimulatorArm64()
@@ -84,7 +80,13 @@ publishing {
 
     publications.withType<MavenPublication>().configureEach {
         artifactId = if (name == "kotlinMultiplatform") publishedArtifactId else "$publishedArtifactId-$name"
-        artifact(emptyJavadocJar)
+        val publicationArtifactId = artifactId
+        val publicationName = name
+        val javadocJar = tasks.register<Jar>("${publicationName}JavadocJar") {
+            archiveBaseName.set(publicationArtifactId)
+            archiveClassifier.set("javadoc")
+        }
+        artifact(javadocJar)
         pom {
             name.set("ComposeRichEditor Block Rich Text")
             description.set("Experimental block-based Compose Multiplatform rich text editor with text blocks, tables, block navigation, and shared floating toolbar behavior.")
