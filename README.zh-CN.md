@@ -1,10 +1,13 @@
 # ComposeRichEditor
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.taocent/compose-richtext.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.taocent/compose-richtext)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
+
 [English](./README.md)
 
 ComposeRichEditor 是一个面向 Android、iOS、Desktop 和 Web 的 Compose Multiplatform 富文本编辑器库。它提供普通富文本编辑器、块级富文本编辑器、富文本格式化、自定义 emoji 渲染、超链接、表格编辑、智能粘贴、JSON 序列化和跨平台编辑器 UI 组件。
 
-> 当前状态：计划以 `0.1.0-alpha01` 作为第一个公开 alpha 版本。在稳定版发布前，API 仍可能调整。
+> 当前状态：`0.1.0-alpha01` 已发布到 Maven Central。在稳定版发布前，API 仍可能调整。
 
 ## 模块
 
@@ -26,7 +29,7 @@ ComposeRichEditor 是一个面向 Android、iOS、Desktop 和 Web 的 Compose Mu
 
 ## 安装
 
-第一个公开 alpha 发布后将使用以下坐标：
+第一个公开 alpha 已发布到 Maven Central：
 
 ```kotlin
 dependencies {
@@ -36,7 +39,7 @@ dependencies {
 }
 ```
 
-发布前本地开发可以直接依赖仓库模块：
+本地开发可以直接依赖仓库模块：
 
 ```kotlin
 dependencies {

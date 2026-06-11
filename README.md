@@ -1,10 +1,13 @@
 # ComposeRichEditor
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.taocent/compose-richtext.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.taocent/compose-richtext)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
+
 [中文文档](./README.zh-CN.md)
 
 ComposeRichEditor is a Compose Multiplatform rich text editor library for Android, iOS, Desktop, and Web. It provides a plain rich text editor, a block-based rich text editor, rich text formatting, custom emoji rendering, hyperlink support, table editing, smart paste, JSON serialization, and cross-platform editor UI components.
 
-> Status: `0.1.0-alpha01` is planned as the first public alpha. APIs may still change before a stable release.
+> Status: `0.1.0-alpha01` is available on Maven Central. APIs may still change before a stable release.
 
 ## Modules
 
@@ -26,7 +29,7 @@ ComposeRichEditor is a Compose Multiplatform rich text editor library for Androi
 
 ## Installation
 
-The first public alpha will use the following coordinates after publishing:
+The first public alpha is available on Maven Central:
 
 ```kotlin
 dependencies {
@@ -36,7 +39,7 @@ dependencies {
 }
 ```
 
-For local development before publishing, include the modules directly from this repository:
+For local development, include the modules directly from this repository:
 
 ```kotlin
 dependencies {
