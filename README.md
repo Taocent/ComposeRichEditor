@@ -5,6 +5,8 @@
 
 [中文文档](./README.zh-CN.md)
 
+If you want to try out the component on the webpage, you can click[Website](https://richeditor.taocent.com)
+
 ComposeRichEditor is a Compose Multiplatform rich text editor library for Android, iOS, Desktop, and Web. It provides a plain rich text editor, a block-based rich text editor, rich text formatting, custom emoji rendering, hyperlink support, table editing, smart paste, JSON serialization, and cross-platform editor UI components.
 
 > Status: `0.1.0-alpha01` is available on Maven Central. APIs may still change before a stable release.
